@@ -59,7 +59,7 @@ def choice_name(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distor Name || q to quit :\n-").strip()
+        answer = input("Choice Distro Name || q to quit :\n-").strip()
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
         elif answer.isalpha():
@@ -80,7 +80,7 @@ def choice_code_name(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distor Code  Name || q to quit :\n-").strip()
+        answer = input("Choice Distro Code  Name || q to quit :\n-").strip()
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
 
@@ -102,7 +102,7 @@ def choice_version_number(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distor Version NUmber || q to quit :\n-").strip()
+        answer = input("Choice Distro Version Number || q to quit :\n-").strip()
         answer.replace(" ","")
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
