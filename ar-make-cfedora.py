@@ -445,7 +445,7 @@ releasever=%s"""%fedora_version
 
 
 def install_tools():
-    check = subprocess.call("sudo dnf install @rpm-development-tools livecd-tools createrepo_c -y --best  --disablerepo=* --enablerepo=fedora",shell=True)
+    check = subprocess.call("sudo dnf install @rpm-development-tools livecd-tools createrepo_c -y --best ",shell=True)
     if check != 0:
         sys.exit("Error Check Your Connection.")
     subprocess.call("rpmdev-setuptree",shell=True)
