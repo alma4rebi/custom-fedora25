@@ -46,11 +46,12 @@ name = "generic"
 code_name = ""
 desktop = ""
 website = "www.arfedora.blogspot.com"
-version = ""
+version = fedora_version
 #icon_theme = ""
 #cursor_icon_theme = ""
 #theme = ""
 local_repo = r"repo  --cost=1 --name=localrepo --baseurl=file://%s/repo"%dirname
+
 
 def choice_name(msg=""):
     global name
@@ -59,7 +60,7 @@ def choice_name(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distro Name || q to quit :\n-").strip()
+        answer = input("Choice Distor Name || q to quit :\n-").strip()
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
         elif answer.isalpha():
@@ -80,7 +81,96 @@ def choice_code_name(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distro Code  Name || q to quit :\n-").strip()
+        answer = input("Choice Distor Code  Name || q to quit || b to back :\n-").strip()
+        if answer == "q" or answer == "Q":
+            sys.exit("\nBye...\n")
+
+        elif answer == "b" or answer == "B":
+            return choice_name()
+
+        elif len(answer)<12:
+            code_name = answer
+            break
+        else:
+            return choice_code_name("Enter Code Name < 12 characters.")
+    return choice_desktop()
+
+
+
+def choice_desktop(msg=""):
+    global name
+    global desktop_dict
+    global desktop
+    while True:
+        subprocess.call("clear")
+        print ("www.arfedora.blogspot.com\n")
+        if len(msg) != 0:
+            print (msg+"\n")
+        for v,k in  desktop_dict.items():
+            print ("%s-%s\n"%(v,k))
+        answer = input("Choice Desktop || q to quit || b to back :\n-").strip()
+        if answer == "q" or answer == "Q":
+            sys.exit("\nBye...\n")
+        elif answer == "b" or answer == "B":
+            return choice_code_name()
+        elif answer in desktop_dict.keys():
+            desktop = desktop_dict[answer]
+            break
+        else:
+            return choice_desktop("Enter Number To Choice Desktop.")
+
+    return choice_wesite()
+
+def choice_wesite(msg=""):
+    global website
+    while True:
+        subprocess.call("clear")
+        print ("www.arfedora.blogspot.com\n")
+        if len(msg) != 0:
+            print (msg+"\n")
+        answer = input("Your Website Example:<http://arfedora.blogspot.com> || q to quit || b to back :\n-").strip()
+        if answer == "q" or answer == "Q":
+            sys.exit("\nBye...\n")
+        elif answer == "b" or answer == "B":
+            return choice_desktop()
+        elif answer.startswith("http"):
+            website = answer
+            break
+
+choice_name()
+
+
+
+"""
+def choice_name(msg=""):
+    global name
+    while True:
+        subprocess.call("clear")
+        print ("www.arfedora.blogspot.com\n")
+        if len(msg) != 0:
+            print (msg+"\n")
+        answer = input("Choice Distor Name || q to quit :\n-").strip()
+        if answer == "q" or answer == "Q":
+            sys.exit("\nBye...\n")
+        elif answer.isalpha():
+            if len(answer)>10:
+                return choice_name("Enter Name < 10 characters.")
+            elif answer=="fedora":
+                choice_name("Cant choice fedora.")
+            name = answer
+            break
+        else:
+            return choice_name("Enter Name without Number Space or symbol.")
+    return choice_code_name()
+
+def choice_code_name(msg=""):
+    global code_name
+    while True:
+        subprocess.call("clear")
+        print ("www.arfedora.blogspot.com\n")
+        if len(msg) != 0:
+            print (msg+"\n")
+        answer = input("Choice Distor Code  Name || q to quit :\n-").strip()
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
 
@@ -102,7 +192,7 @@ def choice_version_number(msg=""):
         print ("www.arfedora.blogspot.com\n")
         if len(msg) != 0:
             print (msg+"\n")
-        answer = input("Choice Distro Version Number || q to quit :\n-").strip()
+        answer = input("Choice Distor Version NUmber || q to quit :\n-").strip()
         answer.replace(" ","")
         if answer == "q" or answer == "Q":
             sys.exit("\nBye...\n")
@@ -160,7 +250,7 @@ def choice_wesite(msg=""):
 
 choice_name()
 
-"""
+
 def get_all_desktop_themes():
     global dirname
     result = []
@@ -274,12 +364,13 @@ mkdir -p %{{buildroot}}/usr/lib/systemd/system-preset/
 cat << EOF >>%{{buildroot}}/usr/lib/os-release
 NAME={13}
 VERSION="%{{dist_version}} (%{{release_name}})"
-ID=fedora
+ID={14}
+ID_LIKE=fedora
 VERSION_ID=%{{version}}
-PRETTY_NAME="{14} %{{dist_version}} (%{{release_name}})"
+PRETTY_NAME="{15} %{{dist_version}} (%{{release_name}})"
 ANSI_COLOR="0;34"
-CPE_NAME="cpe:/o:{15}:{16}:%{{dist_version}}"
-HOME_URL="{17}"
+CPE_NAME="cpe:/o:{16}:{17}:%{{dist_version}}"
+HOME_URL="{18}"
 BUG_REPORT_URL="https://bugzilla.redhat.com/"
 REDHAT_BUGZILLA_PRODUCT="Fedora"
 REDHAT_BUGZILLA_PRODUCT_VERSION=25
@@ -329,12 +420,12 @@ rm -rf %{{buildroot}}
 
 %files notes
 %defattr(-,root,root,-)
-%doc README.{18}-Release-Notes
+%doc README.{19}-Release-Notes
 
 %changelog
 * Tue Apr 18 2017 youcef sourani <yousse.m.sourani@gmail.com> - 25-1
-- Update To {19}-release
-""".format(code_name , version   ,name.title()  , name , fedora_version , website,name.title() , name.title()   ,name.title() , name.title() , name , name ,version  ,name ,name ,name ,name ,website  ,name.title() ,name )
+- Update To {20}-release
+""".format(code_name , version   ,name.title()  , name , fedora_version , website,name.title() , name.title()   ,name.title() , name.title() , name , name ,version  ,name ,name,name ,name ,name ,website  ,name.title() ,name )
 
 #.format(code_name 0, version 1  ,name.title() 2 , name 3, fedora_version 4,name.title() 5, name.title() 6  ,name.title() 7, name.title() 8, name 9, name 10,version 11 ,name 12,name 13,name 14,name 15,website 16 ,name.title() 17,name 18)
 
