@@ -52,11 +52,11 @@ wqy-microhei-fonts			# a compact CJK font, to replace:
 -@input-methods
 -scim*
 -m17n*
--ibus*
+#-ibus*
 -iok
 
 # save some space (from @standard)
--make
+#-make
 
 # admin-tools
 -gnome-disk-utility

@@ -24,6 +24,8 @@ home = "/home/"+login_name
 dirname = os.path.abspath(os.path.dirname(__file__))
 fedora_version = "25"
 
+os.makedirs(dirname+"/repo",exist_ok=True)
+
 desktop_dict = {
     "1" : "Gnome Shell." ,
     "2" : "Kde Plasma."

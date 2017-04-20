@@ -12,7 +12,7 @@
 -autofs
 # smartcards won't really work on the livecd.
 -coolkey
--wget
+#-wget
 
 # scanning takes quite a bit of space :/
 -xsane
